@@ -12,7 +12,7 @@ module DataLayer
     con&.close
     rs
   end
-  
+
   def add_imei(imei)
     "INSERT INTO devices (imei) Values (#{imei})"
   end

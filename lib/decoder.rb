@@ -10,6 +10,10 @@ class Decoder
     result
   end
 
+  def self.get_protocol_number(byte_array, index)
+    byte_array[index]
+  end
+
   # accept byte array and check validity
   def self.valid_stream?(stream)
     !stream.join.match(/^120120\d*9211492110$/).nil?
