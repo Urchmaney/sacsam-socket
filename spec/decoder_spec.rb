@@ -1,14 +1,15 @@
 require './lib/decoder'
 
 RSpec.describe Decoder do
-  describe '.decode' do
-    it 'returns zero protocol and empty data for invalid stream' do
-      data = 'kvjv'
-      expect(Decoder.decode(data.bytes)[:protocol]).to eql(0)
-      expect(Decoder.decode(data.bytes)[:data]).to eql('')
+  describe '.get_protocol_number' do
+    it 'return protocol Number for valid byte array' do
+      stream = "xx\x04\x01\r\n"
+      expect(Decoder.get_protocol_number(stream.bytes)).to eql(1)
     end
 
-    it 'returns data for the protocol for valid data' do
+    it 'returns 0 as protocol number for invalid byte array' do
+      stream = 'wrong'
+      expect(Decoder.get_protocol_number(stream.bytes)).to eql(0)
     end
   end
 
@@ -19,8 +20,17 @@ RSpec.describe Decoder do
     end
 
     it 'return true for valid stream' do
-      input_stream = 'xx\r\n'
+      input_stream = "xx\r\n"
       expect(Decoder.valid_stream?(input_stream.bytes)).to be_truthy
+    end
+  end
+
+  describe '.login' do
+    it 'return the corresponding IMEI' do
+      input_stream = "xx\n\x01\x01#Eg\x89\x01#E\x01\r\n"
+      another_stream = "xx\n\x01\x03Y3\x90u#\x91@\r\n"
+      expect(Decoder.login(input_stream.bytes)).to eql('123456789012345')
+      expect(Decoder.login(another_stream.bytes)).to eql('359339075239140')
     end
   end
 end
