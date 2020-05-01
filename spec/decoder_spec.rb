@@ -25,6 +25,13 @@ RSpec.describe Decoder do
     end
   end
 
+  describe '.gps_positioning' do
+    it 'return the date,longitude and latitude' do
+      input_stream = "xx\f\n\n\x03\x17\x0F2\x17\x9C(:\x1DJ\x14g\t\\\x05\x1F\"<\r\n"
+      expect(Decoder.gps_positioning(input_stream.bytes)).to eql({})
+    end
+  end
+
   describe '.login' do
     it 'return the corresponding IMEI' do
       input_stream = "xx\n\x01\x01#Eg\x89\x01#E\x01\r\n"
