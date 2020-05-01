@@ -22,10 +22,10 @@ class Decoder
     p byte_array
     date_start_index = DATA_START_INDEX - 1
     date = DateTime.new((2000 + byte_array[++date_start_index]),
-                    byte_array[++date_start_index],
-                    byte_array[++date_start_index],
-                    byte_array[++date_start_index],
-                    byte_array[++date_start_index])
+                        byte_array[++date_start_index],
+                        byte_array[++date_start_index],
+                        byte_array[++date_start_index],
+                        byte_array[++date_start_index])
     lat = byte_array[11...15].join('')
     lon = byte_array[15...19].join('')
     { date: date, longitude: lon, latitude: lat }
