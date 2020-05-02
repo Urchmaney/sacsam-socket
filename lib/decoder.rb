@@ -19,7 +19,6 @@ class Decoder
   end
 
   def self.gps_positioning(byte_array)
-    p byte_array
     date_start_index = DATA_START_INDEX - 1
     date = DateTime.new((2000 + byte_array[++date_start_index]),
                         byte_array[++date_start_index],

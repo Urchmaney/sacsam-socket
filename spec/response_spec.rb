@@ -11,10 +11,17 @@ RSpec.describe Response do
     end
   end
 
-  describe 'response for add gps coordinate' do
+  describe '.gps coordinate' do
     it 'Returns appropriate response for stream' do
       stream = "xx\x12\x10\n\x03\x17\x0F2\x17\x9C\x02k?>\f\"\xADe\x1F4`\r\n"
       expect(Response.add_coordinate(stream.bytes)).to eql("xx\x00\n\n\x03\x17\x0F2\x17\r\n")
+    end
+  end
+
+  describe '.factory_reset' do
+    it 'Returns appropriate response for factory reset' do
+      stream = "xx\x01\x0F\r\n"
+      expect(Response.factory_reset(stream.bytes)).to eql(stream)
     end
   end
 end

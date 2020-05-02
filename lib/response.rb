@@ -9,4 +9,8 @@ module Response
   def add_coordinate(bytes)
     [120, 120, 0, 10, *bytes[4..9], 13, 10].pack('c*')
   end
+
+  def factory_reset(bytes)
+    bytes.pack('c*')
+  end
 end
