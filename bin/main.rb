@@ -8,6 +8,7 @@ server = TCPServer.open(2021)
 loop do
   client = server.accept
   stream_bytes = client.gets.bytes
+  perform_action(stream_bytes, client)
 end
 
 def perform_action(bytes_array, connection)
